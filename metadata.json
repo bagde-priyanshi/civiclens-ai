@@ -1,0 +1,6 @@
+{
+  "name": "CivicLens AI",
+  "description": "A premium civic issue reporting and community validation platform featuring a map-first interface, trust scoring, and simulated AI validation.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

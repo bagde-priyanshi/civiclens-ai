@@ -1,0 +1,333 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* Inter Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom map marker styles */
+.custom-marker {
+  background: none !important;
+  border: none !important;
+}
+
+/* Marker drop bounce animation */
+.marker-drop {
+  animation: markerDropAnim 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes markerDropAnim {
+  0% {
+    transform: translateY(-80px) scale(0.2);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(12px) scale(1.15);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-6px) scale(0.95);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.marker-pin {
+  width: 44px;
+  height: 44px;
+  border-radius: 50% 50% 50% 0;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -22px 0 0 -22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.marker-pin:hover {
+  transform: rotate(-45deg) scale(1.15);
+  z-index: 1000 !important;
+}
+
+.marker-icon-wrapper {
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Marker pulsing outer halo */
+.marker-pulse {
+  position: absolute;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  left: 50%;
+  top: 50%;
+  margin: -30px 0 0 -30px;
+  animation: marker-glow-pulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes marker-glow-pulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Animated Pulse ring for location capture */
+.location-pulse-ring {
+  border: 3px solid #3b82f6;
+  border-radius: 30px;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  animation: location-pulsate 1.8s ease-out infinite;
+  opacity: 0.0;
+}
+
+@keyframes location-pulsate {
+  0% {transform: scale(0.1, 0.1); opacity: 0.0;}
+  50% {opacity: 1.0;}
+  100% {transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+
+/* Leaflet control custom overrides to make them elegant and fit our light theme */
+.leaflet-bar {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.leaflet-bar a {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #1e293b !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 16px !important;
+  transition: all 0.2s ease;
+}
+
+.leaflet-bar a:hover {
+  background-color: #ffffff !important;
+  color: #3b82f6 !important;
+}
+
+.leaflet-container {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Custom scrollbar for sheets */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Button micro-interactions */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated grid background for onboarding */
+.animated-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+}
+
+/* Haptic simulation visual flash effect */
+.haptic-flash {
+  animation: flash-haptic 0.15s ease-out;
+}
+
+@keyframes flash-haptic {
+  0% { background-color: rgba(59, 130, 246, 0.15); }
+  100% { background-color: transparent; }
+}
+
+/* Custom slider/gradient bar */
+.slider-gradient {
+  background: linear-gradient(90deg, #ef4444 0%, #f59e0b 50%, #10b981 100%);
+}
+
+/* --- High Fidelity Dark Theme Rules --- */
+html.dark,
+html.dark body {
+  background-color: #0f172a !important; /* Slate 900 */
+  color: #f8fafc;
+}
+
+/* Glass & Card Backgrounds in Dark Mode */
+html.dark nav,
+html.dark .glass-panel,
+html.dark .modal-content,
+html.dark .bg-slate-50\/50,
+html.dark .bg-slate-50\/40,
+html.dark .bg-white\/75,
+html.dark .bg-white\/90 {
+  background-color: #1e293b !important; /* Highly visible Slate 800 */
+  border-color: rgba(255, 255, 255, 0.12) !important;  
+  color: #f8fafc !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Sidebar, main cards, and drawer content background */
+html.dark .bg-white,
+html.dark .bg-slate-50 {
+  background-color: #1e293b !important; /* Warm Slate 800 for readability */
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Sub-card elements inside drawers and modals for structural depth */
+html.dark .bg-slate-50,
+html.dark .bg-slate-100,
+html.dark .bg-white .border-slate-100 {
+  background-color: #0f172a !important; /* Nested slate-900 */
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-100:hover,
+html.dark .hover\:bg-blue-50\/50:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important; /* interactive hover feedback */
+}
+
+/* Scrollbar dark mode */
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Input elements in dark mode */
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* General Text Overrides for contrast */
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-400 {
+  color: #cbd5e1 !important; /* Much lighter slate for high legibility */
+}
+
+/* Accent Colors adjustment for high contrast on dark backgrounds */
+html.dark .text-blue-600 {
+  color: #60a5fa !important;
+}
+html.dark .text-indigo-600,
+html.dark .text-indigo-700 {
+  color: #a5b4fc !important;
+}
+html.dark .text-emerald-600 {
+  color: #34d399 !important;
+}
+html.dark .text-purple-600 {
+  color: #c084fc !important;
+}
+
+/* Border overrides */
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-50,
+html.dark .border-slate-100\/40,
+html.dark .border-white\/60,
+html.dark .border-transparent {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Translucent overlays */
+html.dark .bg-slate-900\/40 {
+  background-color: rgba(15, 23, 42, 0.75) !important;
+}
+
+/* Button overrides in dark mode */
+html.dark .bg-indigo-50 {
+  background-color: rgba(99, 102, 241, 0.25) !important;
+  color: #c7d2fe !important;
+}
+html.dark .bg-blue-50 {
+  background-color: rgba(59, 130, 246, 0.25) !important;
+  color: #bfdbfe !important;
+}
+html.dark .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.25) !important;
+  color: #a7f3d0 !important;
+}
+html.dark .bg-red-50 {
+  background-color: rgba(239, 68, 68, 0.25) !important;
+  color: #fecaca !important;
+}
+
+/* Leaflet maps components */
+html.dark .leaflet-bar,
+html.dark .leaflet-control,
+html.dark .leaflet-control-attribution {
+  background-color: #1e293b !important;
+  color: #cbd5e1 !important;
+  border-color: #334155 !important;
+}
+html.dark .leaflet-control-attribution a {
+  color: #60a5fa !important;
+}
+
